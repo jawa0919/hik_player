@@ -4,6 +4,8 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:hik_player/hik_player.dart';
 
+import 'common.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -53,8 +55,28 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            Center(
+              child: Text('Running on: $_platformVersion\n'),
+            ),
+            ElevatedButton(
+              child: const Text('HikPlayerPage'),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return HikPlayerPage(
+                    host: Common.host,
+                    appKey: Common.appKey,
+                    appSecret: Common.appSecret,
+                    cameraIndexCode: Common.cameraIndexCode,
+                    title: "摄像头",
+                    speed: 50,
+                  );
+                }));
+              },
+            ),
+          ],
         ),
       ),
     );
