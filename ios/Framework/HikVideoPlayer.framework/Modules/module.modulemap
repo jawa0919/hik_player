@@ -1,0 +1,6 @@
+framework module HikVideoPlayer {
+  umbrella header "HikVideoPlayer.h"
+
+  export *
+  module * { export * }
+}

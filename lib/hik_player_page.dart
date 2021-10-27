@@ -6,6 +6,7 @@
  */
 
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -205,16 +206,25 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
       final externalPath = externalDirs.path;
       final path = '$externalPath/${DateTime.now().toString()}.jpg';
       m.showSnackBar(const SnackBar(content: Text("正在截图")));
-      if (await _ctrl?.capturePicture(path) == true) {
-        final result = await ImageGallerySaver.saveFile(path);
-        if (result["isSuccess"]) {
-          m.showSnackBar(const SnackBar(content: Text("截图已保存到手机相册中")));
-        } else {
-          m.showSnackBar(const SnackBar(content: Text("保存截图失败")));
+      if (Platform.isIOS) {
+        final res = await _ctrl?.capturePicture(path);
+        if (res["ret"]) {
+          m.showSnackBar(SnackBar(content: Text(res["msg"])));
         }
-      } else {
-        m.showSnackBar(const SnackBar(content: Text("截图失败")));
+      } else if (Platform.isAndroid) {
+        if (await _ctrl?.capturePicture(path) == true) {
+          final result = await ImageGallerySaver.saveFile(path);
+          if (result["isSuccess"]) {
+            m.showSnackBar(const SnackBar(content: Text("截图已保存到手机相册中")));
+          } else {
+            m.showSnackBar(const SnackBar(content: Text("保存截图失败")));
+          }
+        } else {
+          m.showSnackBar(const SnackBar(content: Text("截图失败")));
+        }
       }
+      final a = await _ctrl?.capturePicture(path);
+      debugPrint(a.toString());
     } else {
       m.showSnackBar(const SnackBar(content: Text("Some Permission Error")));
     }

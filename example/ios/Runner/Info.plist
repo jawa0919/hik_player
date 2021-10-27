@@ -41,5 +41,36 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>请允许此App使用您的媒体库，以便完成上传头像以及相关上传图片服务</string>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>请允许此App使用您的音乐库，以便完成发送语音消息以及相关上传音频服务</string>
+	<key>NSCameraUsageDescription</key>
+	<string>请允许此App使用您的相机，以便完成二维码快捷设置和网页认证登录功能以及相关上传头像图片服务</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>请允许此App使用您的麦克风，以便完成发送语音消息，拍摄视频消息的功能</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>请允许此App使用您的相册，以便完成发送图片消息功能以及相关上传图片服务</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>请允许此App使用您的定位，以便使用导航或者路径规划功能</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>请允许此App使用您的定位，以便使用导航或者路径规划功能</string>
+	<key>NSLocationUsageDescription</key>
+	<string>请允许此App使用您的定位，以便使用导航或者路径规划功能</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请允许此App使用您的定位，以便使用导航或者路径规划功能</string>
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>请允许此App使用您的文档库，以便完成发送文件的功能以及相关上传文件的服务</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>请允许此App使用您的FaceID认证，以便使用安全登录的功能。</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
