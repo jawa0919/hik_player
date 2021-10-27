@@ -7,7 +7,18 @@ import 'package:hik_player/hik_player.dart';
 import 'common.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatefulWidget {

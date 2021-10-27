@@ -1,0 +1,5 @@
+-keep class org.MediaPlayer.PlayM4.** {*;}
+-keep class com.hikvision.netsdk.** {*;}
+-keep class com.hikvision.audio.** {*;}
+-keep class hik.common.isms.hpsclient.** {*;}
+-keep class com.hikvision.open.hikvideoplayer.** {*;}

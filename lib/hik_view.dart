@@ -43,11 +43,11 @@ class _HikViewState extends State<HikView> with WidgetsBindingObserver {
         debugPrint("_HikViewState AppLifecycleState.inactive");
         break;
       case AppLifecycleState.paused:
-        _controller?.onPause();
+        // _controller?.onPause();
         debugPrint("_HikViewState AppLifecycleState.paused");
         break;
       case AppLifecycleState.resumed:
-        _controller?.onResume();
+        // _controller?.onResume();
         debugPrint("_HikViewState AppLifecycleState.resumed");
         break;
       case AppLifecycleState.detached:

@@ -209,12 +209,14 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
         final result = await ImageGallerySaver.saveFile(path);
         if (result["isSuccess"]) {
           m.showSnackBar(const SnackBar(content: Text("截图已保存到手机相册中")));
+        } else {
+          m.showSnackBar(const SnackBar(content: Text("保存截图失败")));
         }
       } else {
-        m.showSnackBar(const SnackBar(content: Text("Some Permission error")));
+        m.showSnackBar(const SnackBar(content: Text("截图失败")));
       }
     } else {
-      m.showSnackBar(const SnackBar(content: Text("Some Permission error")));
+      m.showSnackBar(const SnackBar(content: Text("Some Permission Error")));
     }
   }
 
