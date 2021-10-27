@@ -67,13 +67,6 @@ public class HikView extends TextureView implements TextureView.SurfaceTextureLi
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
-//       if (call.method.equals("capturePicture")) {
-//           Log.i(TAG, "onMethodCall: capturePicture");
-//           Config.mPath = call.argument("path");
-//           result.success(capturePicture());
-//        //    callResult(result, capturePicture());
-//           return;
-//       }
         ThreadUtils.runOnSubThread(() -> {
             handleCall(call, result);
         });
@@ -143,7 +136,9 @@ public class HikView extends TextureView implements TextureView.SurfaceTextureLi
             //预览/回放 抓图
             case "capturePicture":
                 Config.mPath = methodCall.argument("path");
-                callResult(result, capturePicture());
+                ThreadUtils.runOnUiThread(() -> {
+                    callResult(result, capturePicture());
+                });
                 break;
 
             //开启本地录像

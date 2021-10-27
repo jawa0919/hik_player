@@ -6,9 +6,9 @@
  */
 
 class Common {
-  static String host = "https://183.195.141.74:8443";
-  static String appKey = "28436405";
-  static String appSecret = "ByJSO6whfKTCUMxhNAOn";
+  static String host = "";
+  static String appKey = "";
+  static String appSecret = "";
 
-  static String cameraIndexCode = "e52a29bacf1d44439f24b10ce5328918";
+  static String cameraIndexCode = "";
 }
