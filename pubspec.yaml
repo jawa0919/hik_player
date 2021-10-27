@@ -11,6 +11,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #############################################################################
+  crypto: ">=3.0.0 <4.0.0"
+  http: ">=0.0.1 <1.0.0"
+
+  # 文件路径
+  path_provider: ">=2.0.0 <3.0.0"
+  # 媒体保存
+  image_gallery_saver: ">=1.0.0 <2.0.0"
+  # 权限请求
+  permission_handler: ">=8.0.0 <9.0.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

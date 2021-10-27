@@ -1,3 +1,4 @@
+library hik_player;
 
 import 'dart:async';
 
