@@ -1,5 +1,5 @@
 /*
- * @FilePath     : /hik_player/lib/hik_player_page.dart
+ * @FilePath     : /lib/hik_player_page.dart
  * @Date         : 2021-10-27 09:53:17
  * @Author       : jawa0919 <jawa0919@163.com>
  * @Description  : HikPlayerPage
@@ -51,6 +51,7 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            OutlinedButton(child: const Text("播放"), onPressed: _startReal),
             OutlinedButton(
               child: const Text("截图"),
               onPressed: () => _captureLoc(context),
@@ -188,6 +189,7 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
   void _startReal() async {
     HikApi.init(widget.host, widget.appKey, widget.appSecret);
     _previewUrl = await HikApi.previewURLs(widget.cameraIndexCode);
+    await Future.delayed(const Duration(milliseconds: 800));
     await _ctrl?.startRealPlay(_previewUrl);
   }
 

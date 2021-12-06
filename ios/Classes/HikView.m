@@ -543,6 +543,19 @@
             [self.player stopPlay:nil];
         }
             break;
+        case HVPPlayStatusFinish: {
+            // 预览过程中出现异常, 可能是取流中断，可能是其他原因导致的，具体根据错误码进行区分
+            // 做一些提示操作
+            _mPlayerStatus = [NSNumber numberWithInt:FINISH];
+            message = [NSString stringWithFormat:@"播放完成, 错误码是 : 0x%08lx", errorCode];
+            if (self.isRecording) {
+                //如果在录像，先关闭录像
+                [self recordVideo:NO];
+            }
+            // 关闭播放
+            [self.player stopPlay:nil];
+        }
+            break;
             
         default:
             break;
