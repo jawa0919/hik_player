@@ -25,6 +25,7 @@ class HikPlayerPage extends StatefulWidget {
   final String cameraIndexCode;
   final int speed;
   final String title;
+  final bool autoPlay;
 
   const HikPlayerPage({
     Key? key,
@@ -34,6 +35,7 @@ class HikPlayerPage extends StatefulWidget {
     required this.cameraIndexCode,
     this.speed = 50,
     this.title = "",
+    this.autoPlay = true,
   }) : super(key: key);
 
   @override
@@ -51,7 +53,8 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            OutlinedButton(child: const Text("播放"), onPressed: _startReal),
+            if (!widget.autoPlay)
+              OutlinedButton(child: const Text("播放"), onPressed: _startReal),
             OutlinedButton(
               child: const Text("截图"),
               onPressed: () => _captureLoc(context),
@@ -174,7 +177,9 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
       ]),
       onHikCreated: (HikController controller) {
         _ctrl = controller;
-        _startReal();
+        if (widget.autoPlay) {
+          _startReal();
+        }
       },
     );
   }
