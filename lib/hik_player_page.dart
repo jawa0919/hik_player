@@ -22,10 +22,21 @@ class HikPlayerPage extends StatefulWidget {
   final String host;
   final String appKey;
   final String appSecret;
+
+  /// 摄像头id
   final String cameraIndexCode;
+
+  /// 云台控制摄像头时移动速度
   final int speed;
+
+  /// 标题
   final String title;
+
+  /// 是否自动播放 默认 true
   final bool autoPlay;
+
+  /// 自动播放延迟时间 单位毫秒 默认300
+  final int autoPlayDelayed;
 
   const HikPlayerPage({
     Key? key,
@@ -36,6 +47,7 @@ class HikPlayerPage extends StatefulWidget {
     this.speed = 50,
     this.title = "",
     this.autoPlay = true,
+    this.autoPlayDelayed = 300,
   }) : super(key: key);
 
   @override
@@ -194,7 +206,9 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
   void _startReal() async {
     HikApi.init(widget.host, widget.appKey, widget.appSecret);
     _previewUrl = await HikApi.previewURLs(widget.cameraIndexCode);
-    await Future.delayed(const Duration(milliseconds: 800));
+    if (widget.autoPlay) {
+      await Future.delayed(Duration(milliseconds: widget.autoPlayDelayed));
+    }
     await _ctrl?.startRealPlay(_previewUrl);
   }
 
