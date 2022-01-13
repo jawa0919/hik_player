@@ -59,9 +59,9 @@ class HikApi {
   /// See: <https://open.hikvision.com/docs/docId?productId=083bafe42ff34af7842aa3d6d8fa47f6&curNodeId=979ab5f343114ad6a96f2d46d8cc26c9#b5bd6fd9/>
   static Future<String> previewURLs(
     String cameraIndexCode, {
-    int streamType = 0,
-    String protocol = "hik",
-    int transmode = 1,
+    int? streamType,
+    String? protocol,
+    int? transmode,
     String? expand,
     String? streamform,
   }) async {
@@ -69,12 +69,10 @@ class HikApi {
     String url = "$_artemisPath/api/video/v2/cameras/previewURLs";
     final uri = Uri.parse('$_host$url');
     final h = xcakeyHeaders(url);
-    Map<String, dynamic> b = {
-      "cameraIndexCode": cameraIndexCode,
-      "streamType": streamType,
-      "protocol": protocol,
-      "transmode": transmode
-    };
+    Map<String, dynamic> b = {"cameraIndexCode": cameraIndexCode};
+    if (expand != null) b.putIfAbsent("streamType", () => streamType);
+    if (expand != null) b.putIfAbsent("protocol", () => protocol);
+    if (expand != null) b.putIfAbsent("transmode", () => transmode);
     if (expand != null) b.putIfAbsent("expand", () => expand);
     if (streamform != null) b.putIfAbsent("streamform", () => streamform);
     final res = await _sslClient.post(uri, headers: h, body: jsonEncode(b));

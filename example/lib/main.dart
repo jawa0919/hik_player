@@ -87,6 +87,23 @@ class _MyAppState extends State<MyApp> {
                 }));
               },
             ),
+            ElevatedButton(
+              child: const Text('HikPlayerPage-子流'),
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return HikPlayerPage(
+                    host: Common.host,
+                    appKey: Common.appKey,
+                    appSecret: Common.appSecret,
+                    cameraIndexCode: Common.cameraIndexCode,
+                    title: "摄像头",
+                    speed: 50,
+                    streamType: 1,
+                  );
+                }));
+              },
+            ),
           ],
         ),
       ),

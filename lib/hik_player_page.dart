@@ -38,6 +38,21 @@ class HikPlayerPage extends StatefulWidget {
   /// 自动播放延迟时间 单位毫秒 默认300
   final int autoPlayDelayed;
 
+  /// 子码流类型
+  final int streamType;
+
+  /// 取流协议
+  final String protocol;
+
+  /// 传输协议
+  final int transmode;
+
+  /// 标识扩展内容
+  final String expand;
+
+  /// 输出码流转封装格式
+  final String streamform;
+
   const HikPlayerPage({
     Key? key,
     required this.host,
@@ -48,6 +63,11 @@ class HikPlayerPage extends StatefulWidget {
     this.title = "",
     this.autoPlay = true,
     this.autoPlayDelayed = 300,
+    this.streamType = 0,
+    this.protocol = 'hik',
+    this.transmode = 1,
+    this.expand = "",
+    this.streamform = "",
   }) : super(key: key);
 
   @override
@@ -205,7 +225,14 @@ class _HikPlayerPageState extends State<HikPlayerPage> {
   String _previewUrl = "";
   void _startReal() async {
     HikApi.init(widget.host, widget.appKey, widget.appSecret);
-    _previewUrl = await HikApi.previewURLs(widget.cameraIndexCode);
+    _previewUrl = await HikApi.previewURLs(
+      widget.cameraIndexCode,
+      streamType: widget.streamType,
+      protocol: widget.protocol,
+      transmode: widget.transmode,
+      expand: widget.expand,
+      streamform: widget.streamform,
+    );
     if (widget.autoPlay) {
       await Future.delayed(Duration(milliseconds: widget.autoPlayDelayed));
     }
