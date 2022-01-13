@@ -1,5 +1,5 @@
 /*
- * @FilePath     : /hik_player/lib/hik_api.dart
+ * @FilePath     : /lib/hik_api.dart
  * @Date         : 2021-08-17 16:28:42
  * @Author       : jawa0919 <jawa0919@163.com>
  * @Description  : 
@@ -59,22 +59,26 @@ class HikApi {
   /// See: <https://open.hikvision.com/docs/docId?productId=083bafe42ff34af7842aa3d6d8fa47f6&curNodeId=979ab5f343114ad6a96f2d46d8cc26c9#b5bd6fd9/>
   static Future<String> previewURLs(
     String cameraIndexCode, {
-    int? streamType,
-    String? protocol,
-    int? transmode,
+    int streamType = 0,
+    String protocol = "hik",
+    int transmode = 1,
     String? expand,
     String? streamform,
   }) async {
     if (cameraIndexCode.isEmpty) throw ArgumentError("cameraIndexCode.isEmpty");
     String url = "$_artemisPath/api/video/v2/cameras/previewURLs";
-    final headers = xcakeyHeaders(url);
     final uri = Uri.parse('$_host$url');
-    final response = await _sslClient.post(
-      uri,
-      headers: headers,
-      body: jsonEncode({"cameraIndexCode": cameraIndexCode}),
-    );
-    final data = jsonDecode(response.body);
+    final h = xcakeyHeaders(url);
+    Map<String, dynamic> b = {
+      "cameraIndexCode": cameraIndexCode,
+      "streamType": streamType,
+      "protocol": protocol,
+      "transmode": transmode
+    };
+    if (expand != null) b.putIfAbsent("expand", () => expand);
+    if (streamform != null) b.putIfAbsent("streamform", () => streamform);
+    final res = await _sslClient.post(uri, headers: h, body: jsonEncode(b));
+    final data = jsonDecode(res.body);
     return data['data']['url'];
   }
 
@@ -82,17 +86,11 @@ class HikApi {
   static Future manualCapture(String cameraIndexCode) async {
     if (cameraIndexCode.isEmpty) throw ArgumentError("cameraIndexCode.isEmpty");
     String url = "$_artemisPath/api/video/v1/manualCapture";
-    final headers = xcakeyHeaders(url);
     final uri = Uri.parse('$_host$url');
-    final body = {
-      "cameraIndexCode": cameraIndexCode,
-    };
-    final response = await _sslClient.post(
-      uri,
-      headers: headers,
-      body: jsonEncode(body),
-    );
-    final data = jsonDecode(response.body);
+    final h = xcakeyHeaders(url);
+    Map<String, dynamic> b = {"cameraIndexCode": cameraIndexCode};
+    final res = await _sslClient.post(uri, headers: h, body: jsonEncode(b));
+    final data = jsonDecode(res.body);
     return data;
   }
 
@@ -105,20 +103,16 @@ class HikApi {
   ) async {
     if (cameraIndexCode.isEmpty) throw ArgumentError("cameraIndexCode.isEmpty");
     String url = "$_artemisPath/api/video/v1/ptzs/controlling";
-    final headers = xcakeyHeaders(url);
     final uri = Uri.parse('$_host$url');
-    final body = {
+    final h = xcakeyHeaders(url);
+    Map<String, dynamic> b = {
       "cameraIndexCode": cameraIndexCode,
       "action": action,
       "command": command,
       "speed": speed,
     };
-    final response = await _sslClient.post(
-      uri,
-      headers: headers,
-      body: jsonEncode(body),
-    );
-    final data = jsonDecode(response.body);
+    final res = await _sslClient.post(uri, headers: h, body: jsonEncode(b));
+    final data = jsonDecode(res.body);
     return data;
   }
 }
