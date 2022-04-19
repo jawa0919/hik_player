@@ -1,0 +1,33 @@
+name: hik_player
+description: A Very Good Project created by Very Good CLI.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.16.0 <3.0.0"
+  flutter: ">=2.10.0"
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        default_package: hik_player_android
+      ios:
+        default_package: hik_player_ios
+
+dependencies:
+  flutter:
+    sdk: flutter
+  hik_player_android:
+    path: ../hik_player_android
+  hik_player_ios:
+    path: ../hik_player_ios
+  hik_player_platform_interface:
+    path: ../hik_player_platform_interface
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.2.0
+  plugin_platform_interface: ^2.0.0
+  very_good_analysis: ^2.4.0
