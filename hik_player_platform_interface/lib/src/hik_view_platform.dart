@@ -6,13 +6,12 @@
  */
 
 import 'package:flutter/material.dart';
-import 'package:hik_player_platform_interface/src/hik_view_platform_controller.dart';
 
 /// 构建成功的函数返回
 typedef HikViewPlatformCreatedCallback = void Function(
     HikViewPlatformController? hikViewPlatformController);
 
-/// 视图台
+/// 视图台面
 abstract class HikViewPlatform {
   /// 构建
   Widget build({
@@ -21,5 +20,14 @@ abstract class HikViewPlatform {
   }) {
     throw UnimplementedError(
         'HikViewPlatform build is not implemented on the current platform');
+  }
+}
+
+/// 视图控制
+abstract class HikViewPlatformController {
+  /// 开始预览
+  Future<void> startRealPlay(String liveRtspUrl) {
+    throw UnimplementedError(
+        'HikView startRealPlay is not implemented on the current platform');
   }
 }
